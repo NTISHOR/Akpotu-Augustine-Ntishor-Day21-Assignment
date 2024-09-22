@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austeen Computers Product Catalog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            margin-top: 0;
+        }
+        
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .product-name {
+            font-weight: bold;
+        }
+        
+        .product-price {
+            color: #008000;
+        }
+        
+        .product-description {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Austeen Computers Product Catalog</h1>
+    </header>
+    <main>
+        <section id="product-list"></section>
+        <section id="add-product">
+            <h2>Add Product</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input id="name" type="text"><br><br>
+                <label for="price">Price (₦):</label>
+                <input id="price" type="number"><br><br>
+                <label for="amount">Amount:</label>
+                <input id="amount" type="number"><br><br>
+                <label for="description">Description:</label>
+                <textarea id="description"></textarea><br><br>
+                <label for="category">Category:</label>
+                <select id="category">
+                    <option value="Computers">Computers</option>
+                    <option value="Audio">Audio</option>
+                    <option value="Printer">Printer</option>
+                    <option value="Game">Game</option>
+                    <option value="Other Office Equipment">Other Office Equipment</option>
+                </select><br><br>
+                <button id="add-product-btn">Add Product</button>
+            </form>
+        </section>
+        <section id="remove-product">
+            <h2>Remove Product</h2>
+            <form>
+                <label for="product-id">Product ID:</label>
+                <input id="product-id" type="text"><br><br>
+                <button id="remove-product-btn">Remove Product</button>
+            </form>
+        </section>
+        <section id="search-product">
+            <h2>Search Product</h2>
+            <form>
+                <label for="search-query">Search Query:</label>
+                <input id="search-query" type="text"><br><br>
+                <button id="search-product-btn">Search Product</button>
+            </form>
+        </section>
+    </main>
+    
+    <script>
+        // Initialize product catalog
+        let products = {};
+        let productId = 1;
+        
+        // Function to display product list
+        function displayProducts() {
+            const productList = document.getElementById("product-list");
+            productList.innerHTML = "";
+            
+            for (const product in products) {
+                const productDiv = document.createElement("div");
+                productDiv.className = "product";
+                
+                const productName = document.createElement("h2");
+                productName.className = "product-name";
+                productName.textContent = products[product].name;
+                
+                const productPrice = document.createElement("p");
+                productPrice.className = "product-price";
+                productPrice.textContent = `Price: ₦${products[product].price}`;
+                
+                const productAmount = document.createElement("p");
+                productAmount.textContent = `Amount: ${products[product].amount}`;
+                
+                const productDescription = document.createElement("p");
+                productDescription.className = "product-description";
+                productDescription.textContent = products[product].description;
+                
+                const productCategory = document.createElement("p");
+                productCategory.textContent = `Category: ${products[product].category}`;
+                
+                productDiv.appendChild(productName);
+                productDiv.appendChild(productPrice);
+                productDiv.appendChild(productAmount);
+                productDiv.appendChild(productDescription);
+                productDiv.appendChild(productCategory);
+                
+                productList.appendChild(productDiv);
+            }
+        }
+        
+        // Event
